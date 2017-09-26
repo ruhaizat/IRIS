@@ -80,3 +80,15 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
+			<script>
+				$(document).ready(function(){
+					$(".datepickerAdd").datepicker({
+						format: "dd/mm/yyyy"
+					});
+					$(".datepickerAdd").datepicker("setDate", new Date());
+					
+					$(".datepickerEdit").datepicker({
+						format: "dd/mm/yyyy"
+					});
+				});
+			</script>

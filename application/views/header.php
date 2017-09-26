@@ -36,6 +36,8 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!-- jQuery -->
+    <script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <![endif]-->
 </head>
 
@@ -98,6 +100,12 @@
                     <li><a href="javascript:void(0);" class="waves-effect<?php if($activeMenu == 'L'):echo ' active';else: echo '';endif;?>"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Laporan <span class="fa arrow"></span></span></a>
 					    <ul class="nav nav-second-level">
                             <li> <a href="<?php echo base_url();?>Laporan">Lihat</a> </li>
+                        </ul>  
+                    </li>
+                    <li><a href="javascript:void(0);" class="waves-effect<?php if($activeMenu == 'P'):echo ' active';else: echo '';endif;?>"><i class="linea-icon linea-basic fa-fw ti-user"></i> <span class="hide-menu">Pengguna <span class="fa arrow"></span></span></a>
+					    <ul class="nav nav-second-level">
+                            <li> <a href="<?php echo base_url();?>Laporan">Senarai</a> </li>
+                            <li> <a href="<?php echo base_url();?>Laporan">Tambah</a> </li>
                         </ul>  
                     </li>
                 </ul>

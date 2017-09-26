@@ -74,9 +74,28 @@ class FailKerja extends CI_Controller {
 		}else{
 			$data["activeMenu"] = "FK";
 			
-			$query = $this->db->query("SELECT *,tbl_fail.ID AS FailID FROM tbl_fail 
-			INNER JOIN tbl_user ON tbl_fail.KeraniID = tbl_user.ID 
-			INNER JOIN tbl_jenisfail ON tbl_fail.JenisFailID = tbl_jenisfail.ID;");
+			$LoggedUserGroup = $this->session->userdata("LoggedUser")["Group"];
+			$LoggedUserID = $this->session->userdata("LoggedUser")["UserID"];
+			
+			if($LoggedUserGroup == 1){	
+				$query = $this->db->query("SELECT *,tbl_fail.ID AS FailID,uk.FullName AS KeraniName,us.FullName AS SOName FROM tbl_fail 
+					INNER JOIN tbl_user AS uk ON tbl_fail.KeraniID = uk.ID 
+					INNER JOIN tbl_user AS us ON tbl_fail.SOID = us.ID 
+					INNER JOIN tbl_jenisfail ON tbl_fail.JenisFailID = tbl_jenisfail.ID;");			
+			}elseif($LoggedUserGroup == 2){		
+				$query = $this->db->query("SELECT *,tbl_fail.ID AS FailID,uk.FullName AS KeraniName,us.FullName AS SOName FROM tbl_fail 
+					INNER JOIN tbl_user AS uk ON tbl_fail.KeraniID = uk.ID 
+					INNER JOIN tbl_user AS us ON tbl_fail.SOID = us.ID 
+					INNER JOIN tbl_jenisfail ON tbl_fail.JenisFailID = tbl_jenisfail.ID 
+					WHERE tbl_fail.SOID = ".$LoggedUserID.";");				
+			}elseif($LoggedUserGroup == 3){		
+				$query = $this->db->query("SELECT *,tbl_fail.ID AS FailID,uk.FullName AS KeraniName,us.FullName AS SOName FROM tbl_fail 
+					INNER JOIN tbl_user AS uk ON tbl_fail.KeraniID = uk.ID 
+					INNER JOIN tbl_user AS us ON tbl_fail.SOID = us.ID 
+					INNER JOIN tbl_jenisfail ON tbl_fail.JenisFailID = tbl_jenisfail.ID 
+					WHERE tbl_fail.KeraniID = ".$LoggedUserID.";");	
+			}
+			
 			$data["FailList"] = $query->result();			
 			
 			$this->load->view('header', $data); 
@@ -93,11 +112,15 @@ class FailKerja extends CI_Controller {
 		
 		$query = $this->db->query("SELECT * FROM tbl_jenisfail;");
 		$data["JenisFailList"] = $query->result();
+			
+		$query = $this->db->query("SELECT * FROM tbl_catatan;");
+		$data["CatatanList"] = $query->result();
 
 		$this->db->select("*,tbl_fail.ID AS FID");
 		$this->db->from("tbl_fail");
-		$this->db->join("tbl_user", "tbl_fail.KeraniID = tbl_user.ID");
-		$this->db->join("tbl_jenisfail", "tbl_fail.JenisFailID = tbl_jenisfail.ID");
+		$this->db->join("tbl_user", "tbl_fail.KeraniID = tbl_user.ID", "left");
+		$this->db->join("tbl_jenisfail", "tbl_fail.JenisFailID = tbl_jenisfail.ID", "left");
+		$this->db->join("tbl_catatan", "tbl_fail.Catatan = tbl_catatan.ID", "left");
 		$this->db->where("tbl_fail.ID", $ID);
 		$query = $this->db->get();
 		
@@ -123,6 +146,7 @@ class FailKerja extends CI_Controller {
 		$TarikhSiapArr = explode("/",$this->input->post("TarikhSiap"));
 		$TarikhSiap = $TarikhSiapArr[2]."/".$TarikhSiapArr[1]."/".$TarikhSiapArr[0];
 		$Catatan = $this->input->post("Catatan");
+		$CatatanSebab = $this->input->post("CatatanSebab");
 		
 		$data = array(
 		   "NoFail" => $NoFail,
@@ -134,7 +158,8 @@ class FailKerja extends CI_Controller {
 		   "SOID" => $SOID,
 		   "TarikhTerima" => $TarikhTerima,
 		   "TarikhSiap" => $TarikhSiap,
-		   "Catatan" => $Catatan
+		   "Catatan" => $Catatan,
+		   "CatatanSebab" => $CatatanSebab
 		);
 
 		$this->db->where("ID", $ID);

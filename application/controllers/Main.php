@@ -25,8 +25,42 @@ class Main extends CI_Controller {
 		}else{
 			$data["activeMenu"] = "PU";
 			
+			
+			$LoggedUserGroup = $this->session->userdata("LoggedUser")["Group"];
+			$LoggedUserID = $this->session->userdata("LoggedUser")["UserID"];
+			
+			$filterAll = "";
+			$filter = "";
+			$filterJFY = "";
+			
+			if($LoggedUserGroup == 2){
+				$filterAll = " WHERE SOID = ".$LoggedUserID;
+				$filter = " AND SOID = ".$LoggedUserID;
+				$filterJFY = " WHERE SOID = ".$LoggedUserID;			
+			}elseif($LoggedUserGroup == 3){	
+				$filterAll = " WHERE KeraniID = ".$LoggedUserID;
+				$filter = " AND KeraniID = ".$LoggedUserID;
+				$filterJFY = " WHERE KeraniID = ".$LoggedUserID;	
+			}
+			
+			$query = $this->db->query("SELECT COUNT(ID) AS val FROM tbl_fail $filterAll;");
+			$data["JF"] = $query->row();
+			
+			$query = $this->db->query("SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 1 $filter;");
+			$data["LUPUS"] = $query->row();
+			
+			$query = $this->db->query("SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 2 $filter;");
+			$data["BANGUN"] = $query->row();
+			
+			$query = $this->db->query("SELECT COUNT(ID) AS val FROM tbl_fail WHERE JumlahHari > 14 $filter;");
+			$data["EXCEED"] = $query->row();
+			
+			$query = $this->db->query("SELECT SUBSTRING(TarikhPermohonan, 1, 4) AS YearStr, COUNT(ID) AS val, (SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 1 AND SUBSTRING(TarikhPermohonan, 1, 4) = YearStr $filter) AS Lupus, (SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 2 AND SUBSTRING(TarikhPermohonan, 1, 4) = YearStr $filter) AS Bangun FROM tbl_fail $filterJFY GROUP BY SUBSTRING(TarikhPermohonan, 1, 4);");
+			$data["JFY"] = $query->result();
+			
+			
 			$this->load->view('header', $data);
-			$this->load->view('main');
+			$this->load->view('main', $data);
 			$this->load->view('footer');			
 		}
 	}

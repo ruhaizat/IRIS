@@ -20,20 +20,20 @@
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">No. Fail</label>
                                     <div class="col-10">
-                                        <input name="NoFail" class="form-control" type="text" value="<?php echo $FailData->NoFail;?>" placeholder="XXXX/X/XX/000-0-0/00-0000" required="" oninvalid="this.setCustomValidity('Sila isi ruangan ini.')" oninput="setCustomValidity('')">
+                                        <input name="NoFail" class="form-control" type="text" value="<?php echo $FailData->NoFail;?>" placeholder="XXXX/X/XX/000-0-0/00-0000" required="" oninvalid="this.setCustomValidity('Sila isi ruangan ini.')" oninput="setCustomValidity('')" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Nama Kerani</label>
                                     <div class="col-10">
-                                        <input class="form-control" type="text" value="<?php echo $FailData->FullName;?>" readonly>
+                                        <input class="form-control" type="text" value="<?php echo $FailData->FullName;?>" disabled>
                                         <input name="KeraniID" type="hidden" value="<?php echo $FailData->KeraniID;?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Jenis Fail</label>
                                     <div class="col-10">
-                                        <select required="" name="JenisFailID" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')">
+                                        <select required="" name="JenisFailID" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
                                             <option value="">Sila Pilih...</option>
 											<?php foreach($JenisFailList as $eachJenisFail):?>
                                             <option <?php if($FailData->JenisFailID == $eachJenisFail->ID):echo 'selected';endif;?> value="<?php echo $eachJenisFail->ID;?>"><?php echo $eachJenisFail->NamaJenisFail;?></option>
@@ -44,19 +44,19 @@
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Keterangan</label>
                                     <div class="col-10">
-                                        <textarea name="Keterangan" class="form-control" rows="5"><?php echo $FailData->Keterangan;?></textarea>
+                                        <textarea name="Keterangan" class="form-control" rows="5" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>><?php echo $FailData->Keterangan;?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Permohonan / Dokumen</label>
                                     <div class="col-10">
-                                        <input name="TarikhPermohonan" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhPermohonan));?>">
+                                        <input name="TarikhPermohonan" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhPermohonan));?>" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Buka Fail</label>
                                     <div class="col-10">
-                                        <input name="TarikhBukaFail" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhBukaFail));?>">
+                                        <input name="TarikhBukaFail" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhBukaFail));?>" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -86,12 +86,16 @@
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Catatan</label>
                                     <div class="col-10">
-                                        <select required="" name="Catatan" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')">
-                                            <option value="">Sila Pilih...</option>
-                                            <option <?php if(isset($eachSO->Catatan)):if($eachSO->Catatan == 1):echo 'selected';endif;endif;?> value="1">Dalam Semakan</option>
-                                            <option <?php if(isset($eachSO->Catatan)):if($eachSO->Catatan == 2):echo 'selected';endif;endif;?> value="2">Dalam Proses</option>
-                                            <option <?php if(isset($eachSO->Catatan)):if($eachSO->Catatan == 3):echo 'selected';endif;endif;?> value="3">Maklum Balas / Kuiri</option>
-                                        </select>
+										<?php foreach($CatatanList as $eachCatatan):?>
+											<div class="form-check">
+												<label class="custom-control custom-radio">
+													<input <?php if($FailData->Catatan == $eachCatatan->ID):echo 'checked';endif;?> name="radio" type="radio" class="custom-control-input" value="<?php echo $eachCatatan->ID;?>">
+													<span class="custom-control-indicator"></span>
+													<span class="custom-control-description"><?php echo $eachCatatan->NamaCatatan;?></span>
+												</label>
+											</div>
+										<?php endforeach;?>
+										Nyatakan: <input name="CatatanSebab" class="form-control" type="text" value="<?php echo $FailData->CatatanSebab;?>" placeholder="Nyatakan huraian bagi catatan di atas" required="" oninvalid="this.setCustomValidity('Sila isi ruangan ini.')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
 								<?php endif;?>
@@ -105,3 +109,15 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
+			<script>
+				$(document).ready(function(){
+					$(".datepickerAdd").datepicker({
+						format: "dd/mm/yyyy"
+					});
+					$(".datepickerAdd").datepicker("setDate", new Date());
+					
+					$(".datepickerEdit").datepicker({
+						format: "dd/mm/yyyy"
+					});
+				});
+			</script>
