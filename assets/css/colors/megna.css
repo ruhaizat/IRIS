@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/
 /*bootstrap Color*/
 /*Normal Color*/
@@ -46,11 +46,14 @@ body {
   background: #fff;
 }
 /*Top Header Part*/
-.top-left-part {
-  background: rgba(0, 0, 0, 0.04);
-}
 .logo i {
   color: #ffffff;
+}
+.top-left-part .light-logo {
+  display: inline-block;
+}
+.top-left-part .dark-logo {
+  display: none;
 }
 .navbar-header {
   background: #01c0c8;
@@ -102,9 +105,6 @@ body {
 }
 .sidebar #side-menu .user-pro .nav-second-level a:hover {
   color: #01c0c8;
-}
-.fix-sidebar .top-left-part {
-  background: #01c0c8;
 }
 /*themecolor*/
 .bg-theme {

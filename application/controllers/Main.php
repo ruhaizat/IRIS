@@ -79,6 +79,10 @@ class Main extends CI_Controller {
 					echo "Wrong password";
 				}
 			break;
+			case "DeleteFile":
+				$ID = $obj->ID;
+				$this->db->delete("tbl_fail", array("ID" => $ID));
+			break;
 		}
 	}
 }

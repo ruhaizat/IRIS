@@ -38,7 +38,7 @@
                                             <td><?php echo $eachFail->Keterangan;?></td>
                                             <td><?php echo date("d/m/Y", strtotime($eachFail->TarikhPermohonan));?></td>
                                             <td><?php echo date("d/m/Y", strtotime($eachFail->TarikhBukaFail));?></td>
-                                            <td><a href="<?php echo base_url();?>FailKerja/update/<?php echo $eachFail->FailID;?>" title="Kemaskini"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a href="<?php echo base_url();?>FailKerja/delete/<?php echo $eachFail->FailID;?>" title="Padam"><i class="fa fa-trash"></i></a></td>
+                                            <td><a href="<?php echo base_url();?>FailKerja/kemaskini/<?php echo $eachFail->FailID;?>" title="Kemaskini"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a href="#" title="Padam" onclick="DeleteFile('<?php echo $eachFail->ID;?>','<?php echo $eachFail->NoFail;?>');"><i class="fa fa-trash"></i></a></td>
                                         </tr>
 										<?php endforeach;?>
                                     </tbody>

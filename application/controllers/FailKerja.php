@@ -65,7 +65,7 @@ class FailKerja extends CI_Controller {
 
 		$this->db->insert("tbl_fail", $data);
 		
-		redirect(base_url());
+		redirect(base_url()."FailKerja/senarai");
 	}
 	
 	public function senarai(){
@@ -85,49 +85,61 @@ class FailKerja extends CI_Controller {
 		}
 	}
 	
-	public function ajax()
-	{
-		$obj = json_decode($this->input->post("datastr"));
-		$mode = $obj->mode;
+	public function kemaskini($ID){
+		$data["activeMenu"] = "FK";
+			
+		$query = $this->db->query("SELECT * FROM tbl_user WHERE UserGroup = 2;");
+		$data["SOList"] = $query->result();
 		
-		switch($mode){
-			case "SignIn":
-				$this->load->library("bcrypt");
-				$username = $obj->Username;
-				$password = $obj->Password;
-				$query = $this->db->query("SELECT * FROM tbl_user WHERE Username = '$username'");
-				
-				$userData = $query->row();
-				
-				if($query->num_rows() == 0){
-					$accountResult = 1;
-				}
-				else{
-					if($this->bcrypt->check_password($password, $userData->Password) == false) {
-						$accountResult = 2;
-					}else{
-						$userfound = true;
-						
-						$session_data = array(
-							"UserID" => $userData->ID,
-							"FullName" => $userData->FullName,
-							"EmailAddress" => $userData->EmailAddress,
-							"Group" => $userData->UserGroup
-						);
-						$this->session->set_userdata("LoggedUser", $session_data);
-						
-						$accountResult = 0;
-					}
-				}
-				
-				if($accountResult == 0){
-					echo "Account active";
-				}elseif($accountResult == 1){
-					echo "Account not found";
-				}elseif($accountResult == 2){
-					echo "Wrong password";
-				}
-			break;
-		}
+		$query = $this->db->query("SELECT * FROM tbl_jenisfail;");
+		$data["JenisFailList"] = $query->result();
+
+		$this->db->select("*,tbl_fail.ID AS FID");
+		$this->db->from("tbl_fail");
+		$this->db->join("tbl_user", "tbl_fail.KeraniID = tbl_user.ID");
+		$this->db->join("tbl_jenisfail", "tbl_fail.JenisFailID = tbl_jenisfail.ID");
+		$this->db->where("tbl_fail.ID", $ID);
+		$query = $this->db->get();
+		
+		$data["FailData"] = $query->row();
+		
+		$this->load->view('header', $data); 
+		$this->load->view('failkerja/kemaskini.php', $data);
+		$this->load->view('footer');
+	}
+	
+	public function update($ID){
+		$NoFail = $this->input->post("NoFail");
+		$KeraniID = $this->input->post("KeraniID");
+		$JenisFailID = $this->input->post("JenisFailID");
+		$Keterangan = $this->input->post("Keterangan");
+		$TarikhPermohonanArr = explode("/",$this->input->post("TarikhPermohonan"));
+		$TarikhPermohonan = $TarikhPermohonanArr[2]."/".$TarikhPermohonanArr[1]."/".$TarikhPermohonanArr[0];
+		$TarikhBukaFailArr = explode("/",$this->input->post("TarikhBukaFail"));
+		$TarikhBukaFail = $TarikhBukaFailArr[2]."/".$TarikhBukaFailArr[1]."/".$TarikhBukaFailArr[0];
+		$SOID = $this->input->post("SOID");
+		$TarikhTerimaArr = explode("/",$this->input->post("TarikhTerima"));
+		$TarikhTerima = $TarikhTerimaArr[2]."/".$TarikhTerimaArr[1]."/".$TarikhTerimaArr[0];
+		$TarikhSiapArr = explode("/",$this->input->post("TarikhSiap"));
+		$TarikhSiap = $TarikhSiapArr[2]."/".$TarikhSiapArr[1]."/".$TarikhSiapArr[0];
+		$Catatan = $this->input->post("Catatan");
+		
+		$data = array(
+		   "NoFail" => $NoFail,
+		   "KeraniID" => $KeraniID,
+		   "JenisFailID" => $JenisFailID,
+		   "Keterangan" => $Keterangan,
+		   "TarikhPermohonan" => $TarikhPermohonan,
+		   "TarikhBukaFail" => $TarikhBukaFail,
+		   "SOID" => $SOID,
+		   "TarikhTerima" => $TarikhTerima,
+		   "TarikhSiap" => $TarikhSiap,
+		   "Catatan" => $Catatan
+		);
+
+		$this->db->where("ID", $ID);
+		$this->db->update("tbl_fail", $data);
+		
+		redirect(base_url()."FailKerja/senarai");
 	}
 }

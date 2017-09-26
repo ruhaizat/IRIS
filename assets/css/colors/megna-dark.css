@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/
 /*bootstrap Color*/
 /*Normal Color*/
@@ -43,11 +43,11 @@
 }
 /*Just change your choise color here its theme Colors*/
 body {
-  background: #4F5467;
+  background: #292929;
 }
 /*Top Header Part*/
 .top-left-part {
-  background: rgba(0, 0, 0, 0.1);
+  background: #292929;
 }
 .logo i {
   color: #ffffff;
@@ -68,18 +68,18 @@ body {
 }
 /*Sidebar*/
 .sidebar {
-  background: #4F5467;
+  background: #292929;
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
 }
 .sidebar .label-custom {
-  background: #01c0c8;
+  background: #e20b0b;
 }
 #side-menu li a {
-  color: #a6acbc;
+  color: #cbcbcb;
 }
 #side-menu li a {
-  color: #a6acbc;
-  border-left: 0px solid #4F5467;
+  color: #cbcbcb;
+  border-left: 0px solid #292929;
 }
 #side-menu > li > a:hover,
 #side-menu > li > a:focus {
@@ -113,12 +113,12 @@ body {
     background: #444859;
   }
 }
-.fix-sidebar .top-left-part {
-  background: #01c0c8;
+.user-profile .user-pro-body .u-dropdown {
+  color: #cbcbcb;
 }
 /*themecolor*/
 .bg-theme {
-  background-color: #fb9678 !important;
+  background-color: #ed4040 !important;
 }
 .bg-theme-dark {
   background-color: #01c0c8 !important;

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/
 /*bootstrap Color*/
 /*Normal Color*/
@@ -46,25 +46,28 @@ body {
   background: #fff;
 }
 /*Top Header Part*/
-.top-left-part {
-  background: rgba(0, 0, 0, 0.04);
-}
 .logo i {
   color: #ffffff;
 }
+.top-left-part .light-logo {
+  display: inline-block;
+}
+.top-left-part .dark-logo {
+  display: none;
+}
 .navbar-header {
-  background: #ab8ce4;
+  background: #3d3d3d;
 }
 .navbar-top-links > li > a {
   color: #ffffff;
 }
 /*Right panel*/
 .right-sidebar .rpanel-title {
-  background: #ab8ce4;
+  background: #3d3d3d;
 }
 /*Bread Crumb*/
 .bg-title .breadcrumb .active {
-  color: #ab8ce4;
+  color: #3d3d3d;
 }
 /*Sidebar*/
 .sidebar {
@@ -72,7 +75,7 @@ body {
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
 }
 .sidebar .label-custom {
-  background: #01c0c8;
+  background: #e20b0b;
 }
 #side-menu li a {
   color: #54667a;
@@ -86,66 +89,63 @@ body {
   background: rgba(0, 0, 0, 0.03);
 }
 #side-menu > li > a.active {
-  border-left: 3px solid #ab8ce4;
+  border-left: 3px solid #3d3d3d;
   color: #2b2b2b;
   font-weight: 500;
 }
 #side-menu > li > a.active i {
-  color: #ab8ce4;
+  color: #3d3d3d;
 }
 #side-menu ul > li > a:hover {
-  color: #ab8ce4;
+  color: #3d3d3d;
 }
 #side-menu ul > li > a.active {
   color: #2b2b2b;
   font-weight: 500;
 }
 .sidebar #side-menu .user-pro .nav-second-level a:hover {
-  color: #ab8ce4;
-}
-.fix-sidebar .top-left-part {
-  background: #ab8ce4;
+  color: #3d3d3d;
 }
 /*themecolor*/
 .bg-theme {
-  background-color: #fb9678 !important;
+  background-color: #ed4040 !important;
 }
 .bg-theme-dark {
-  background-color: #01c0c8 !important;
+  background-color: #2b2b2b !important;
 }
 /*Chat widget*/
 .chat-list .odd .chat-text {
-  background: #ab8ce4;
+  background: #3d3d3d;
 }
 /*Button*/
 .btn-custom {
-  background: #ab8ce4;
-  border: 1px solid #ab8ce4;
+  background: #3d3d3d;
+  border: 1px solid #3d3d3d;
   color: #ffffff;
 }
 .btn-custom:hover {
-  background: #ab8ce4;
+  background: #3d3d3d;
   opacity: 0.8;
   color: #ffffff;
-  border: 1px solid #ab8ce4;
+  border: 1px solid #3d3d3d;
 }
 /*Custom tab*/
 .customtab li.active a,
 .customtab li.active a:hover,
 .customtab li.active a:focus {
-  border-bottom: 2px solid #ab8ce4;
-  color: #ab8ce4;
+  border-bottom: 2px solid #3d3d3d;
+  color: #3d3d3d;
 }
 .tabs-vertical li.active a,
 .tabs-vertical li.active a:hover,
 .tabs-vertical li.active a:focus {
-  background: #ab8ce4;
-  border-right: 2px solid #ab8ce4;
+  background: #3d3d3d;
+  border-right: 2px solid #3d3d3d;
 }
 /*Nav-pills*/
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:focus,
 .nav-pills > li.active > a:hover {
-  background: #ab8ce4;
+  background: #3d3d3d;
   color: #ffffff;
 }
