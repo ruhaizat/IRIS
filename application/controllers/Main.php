@@ -36,11 +36,11 @@ class Main extends CI_Controller {
 			if($LoggedUserGroup == 2){
 				$filterAll = " WHERE SOID = ".$LoggedUserID;
 				$filter = " AND SOID = ".$LoggedUserID;
-				$filterJFY = " WHERE SOID = ".$LoggedUserID;			
+				//$filterJFY = " WHERE SOID = ".$LoggedUserID;			
 			}elseif($LoggedUserGroup == 3){	
 				$filterAll = " WHERE KeraniID = ".$LoggedUserID;
 				$filter = " AND KeraniID = ".$LoggedUserID;
-				$filterJFY = " WHERE KeraniID = ".$LoggedUserID;	
+				//$filterJFY = " WHERE KeraniID = ".$LoggedUserID;	
 			}
 			
 			$query = $this->db->query("SELECT COUNT(ID) AS val FROM tbl_fail $filterAll;");
@@ -55,7 +55,7 @@ class Main extends CI_Controller {
 			$query = $this->db->query("SELECT COUNT(ID) AS val FROM tbl_fail WHERE JumlahHari > 14 $filter;");
 			$data["EXCEED"] = $query->row();
 			
-			$query = $this->db->query("SELECT SUBSTRING(TarikhPermohonan, 1, 4) AS YearStr, COUNT(ID) AS val, (SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 1 AND SUBSTRING(TarikhPermohonan, 1, 4) = YearStr $filter) AS Lupus, (SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 2 AND SUBSTRING(TarikhPermohonan, 1, 4) = YearStr $filter) AS Bangun FROM tbl_fail $filterJFY GROUP BY SUBSTRING(TarikhPermohonan, 1, 4);");
+			$query = $this->db->query("SELECT SUBSTRING(TarikhPermohonan, 6, 2) AS Month, SUBSTRING(TarikhPermohonan, 1, 4) AS Year, CONCAT(SUBSTRING(TarikhPermohonan, 6, 2),'-',SUBSTRING(TarikhPermohonan, 1, 4)) AS MonthYear, COUNT(ID) AS val, (SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 1 AND CONCAT(SUBSTRING(TarikhPermohonan, 6, 2),'-',SUBSTRING(TarikhPermohonan, 1, 4)) = MonthYear AND JumlahHari <= 14 $filter) AS Lupus, (SELECT COUNT(ID) AS val FROM tbl_fail WHERE JenisFailID = 2 AND CONCAT(SUBSTRING(TarikhPermohonan, 6, 2),'-',SUBSTRING(TarikhPermohonan, 1, 4)) = MonthYear AND JumlahHari <= 14 $filter) AS Bangun FROM tbl_fail WHERE JumlahHari <= 14  $filter GROUP BY CONCAT(SUBSTRING(TarikhPermohonan, 6, 2),'-',SUBSTRING(TarikhPermohonan, 1, 4)) ORDER BY SUBSTRING(TarikhPermohonan, 1, 4),SUBSTRING(TarikhPermohonan, 6, 2) ASC;");
 			$data["JFY"] = $query->result();
 			
 			

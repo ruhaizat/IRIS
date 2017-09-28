@@ -22,8 +22,6 @@
     <link href="<?php echo base_url();?>assets/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet">
-    <!--Date Picker -->
-    <script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css"></script>
     <!--DataTable -->
     <link href="<?php echo base_url();?>assets/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -31,6 +29,8 @@
     <link href="<?php echo base_url();?>assets/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
     <!-- color CSS -->
     <link href="<?php echo base_url();?>assets/css/colors/default-dark.css" id="theme" rel="stylesheet">
+    <!--Date Picker -->
+    <link href="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,7 +38,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <!-- jQuery -->
     <script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
@@ -97,17 +96,19 @@
 							<?php endif;?>
                         </ul>
                     </li>
+					<?php if($this->session->userdata("LoggedUser")["Group"] == 1):?>
                     <li><a href="javascript:void(0);" class="waves-effect<?php if($activeMenu == 'L'):echo ' active';else: echo '';endif;?>"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Laporan <span class="fa arrow"></span></span></a>
 					    <ul class="nav nav-second-level">
-                            <li> <a href="<?php echo base_url();?>Laporan">Lihat</a> </li>
+                            <li> <a href="<?php echo base_url();?>Laporan/index">Jana</a> </li>
                         </ul>  
                     </li>
                     <li><a href="javascript:void(0);" class="waves-effect<?php if($activeMenu == 'P'):echo ' active';else: echo '';endif;?>"><i class="linea-icon linea-basic fa-fw ti-user"></i> <span class="hide-menu">Pengguna <span class="fa arrow"></span></span></a>
 					    <ul class="nav nav-second-level">
-                            <li> <a href="<?php echo base_url();?>Laporan">Senarai</a> </li>
-                            <li> <a href="<?php echo base_url();?>Laporan">Tambah</a> </li>
+                            <li> <a href="<?php echo base_url();?>Penggun">Senarai</a> </li>
+                            <li> <a href="<?php echo base_url();?>Penggun">Tambah</a> </li>
                         </ul>  
                     </li>
+					<?php endif;?>
                 </ul>
             </div>
         </div>

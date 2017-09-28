@@ -25,14 +25,14 @@
     <script src="<?php echo base_url();?>assets/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="<?php echo base_url();?>assets/bower_components/jquery-sparkline/jquery.charts-sparkline.js"></script>
     <script src="<?php echo base_url();?>assets/bower_components/toast-master/js/jquery.toast.js"></script>
-    <!--Date Picker -->
-    <script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!--DataTable -->
     <script src="<?php echo base_url();?>assets/bower_components/datatables/jquery.dataTables.min.js"></script>
     <!--Sweet Alert -->
     <script src="<?php echo base_url();?>assets/bower_components/sweetalert/sweetalert.min.js"></script>
     <!--Style Switcher -->
     <script src="<?php echo base_url();?>assets/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    <!--Date Picker -->
+    <script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 </body>
 
 </html>

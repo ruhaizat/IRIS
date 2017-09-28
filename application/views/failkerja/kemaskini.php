@@ -20,43 +20,51 @@
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">No. Fail</label>
                                     <div class="col-10">
-                                        <input name="NoFail" class="form-control" type="text" value="<?php echo $FailData->NoFail;?>" placeholder="XXXX/X/XX/000-0-0/00-0000" required="" oninvalid="this.setCustomValidity('Sila isi ruangan ini.')" oninput="setCustomValidity('')" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
+                                        <input name="NoFail" class="form-control" type="text" value="<?php echo $FailData->NoFail;?>" placeholder="XXXX/X/XX/000-0-0/00-0000" required="" oninvalid="this.setCustomValidity('Sila isi ruangan ini.')" oninput="setCustomValidity('')" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "readonly";endif;?>>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Nama Kerani</label>
                                     <div class="col-10">
-                                        <input class="form-control" type="text" value="<?php echo $FailData->FullName;?>" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $FailData->FullName;?>" readonly>
                                         <input name="KeraniID" type="hidden" value="<?php echo $FailData->KeraniID;?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Jenis Fail</label>
                                     <div class="col-10">
-                                        <select required="" name="JenisFailID" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
+										<?php foreach($JenisFailList as $eachJenisFail):?>
+                                            <?php if($FailData->JenisFailID == $eachJenisFail->ID):$SelJenisFailID = $eachJenisFail->ID;$SelJenisFailName = $eachJenisFail->NamaJenisFail;endif;?>
+										<?php endforeach;?>
+										<?php if($this->session->userdata("LoggedUser")["Group"] == 1):?>
+                                        <select required="" name="JenisFailID" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')" >
                                             <option value="">Sila Pilih...</option>
 											<?php foreach($JenisFailList as $eachJenisFail):?>
-                                            <option <?php if($FailData->JenisFailID == $eachJenisFail->ID):echo 'selected';endif;?> value="<?php echo $eachJenisFail->ID;?>"><?php echo $eachJenisFail->NamaJenisFail;?></option>
+                                            <option <?php if($FailData->JenisFailID == $eachJenisFail->ID):$SelJenisFailName = $eachJenisFail->NamaJenisFail;echo 'selected';endif;?> value="<?php echo $eachJenisFail->ID;?>"><?php echo $eachJenisFail->NamaJenisFail;?></option>
 											<?php endforeach;?>
                                         </select>
+										<?php else:?>
+                                        <input name="JenisFailID" type="hidden" value="<?php echo $SelJenisFailID;?>">
+                                        <input class="form-control" type="text" value="<?php echo $SelJenisFailName;?>" readonly>
+										<?php endif;?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Keterangan</label>
                                     <div class="col-10">
-                                        <textarea name="Keterangan" class="form-control" rows="5" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>><?php echo $FailData->Keterangan;?></textarea>
+                                        <textarea name="Keterangan" class="form-control" rows="5" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "readonly";endif;?>><?php echo $FailData->Keterangan;?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Permohonan / Dokumen</label>
                                     <div class="col-10">
-                                        <input name="TarikhPermohonan" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhPermohonan));?>" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
+                                        <input name="TarikhPermohonan" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhPermohonan));?>" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "readonly";endif;?>>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Buka Fail</label>
                                     <div class="col-10">
-                                        <input name="TarikhBukaFail" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhBukaFail));?>" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "disabled";endif;?>>
+                                        <input name="TarikhBukaFail" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhBukaFail));?>" <?php if($this->session->userdata("LoggedUser")["Group"] != 1):echo "readonly";endif;?>>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -74,13 +82,13 @@
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Terima</label>
                                     <div class="col-10">
-                                        <input name="TarikhTerima" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhBukaFail));?>">
+                                        <input name="TarikhTerima" class="form-control datepickerEdit" type="text" value="<?php if($FailData->TarikhTerima != "0000-00-00"):echo date('d/m/Y', strtotime($FailData->TarikhTerima));endif;?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Siap</label>
                                     <div class="col-10">
-                                        <input name="TarikhSiap" class="form-control datepickerEdit" type="text" value="<?php echo date('d/m/Y', strtotime($FailData->TarikhBukaFail));?>">
+                                        <input name="TarikhSiap" class="form-control datepickerEdit" type="text" value="<?php if($FailData->TarikhSiap != "0000-00-00"):echo date('d/m/Y', strtotime($FailData->TarikhSiap));endif;?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -89,13 +97,13 @@
 										<?php foreach($CatatanList as $eachCatatan):?>
 											<div class="form-check">
 												<label class="custom-control custom-radio">
-													<input <?php if($FailData->Catatan == $eachCatatan->ID):echo 'checked';endif;?> name="radio" type="radio" class="custom-control-input" value="<?php echo $eachCatatan->ID;?>">
+													<input <?php if($FailData->Catatan == $eachCatatan->ID):echo 'checked';endif;?> name="Catatan" type="radio" class="custom-control-input" value="<?php echo $eachCatatan->ID;?>">
 													<span class="custom-control-indicator"></span>
 													<span class="custom-control-description"><?php echo $eachCatatan->NamaCatatan;?></span>
 												</label>
 											</div>
 										<?php endforeach;?>
-										Nyatakan: <input name="CatatanSebab" class="form-control" type="text" value="<?php echo $FailData->CatatanSebab;?>" placeholder="Nyatakan huraian bagi catatan di atas" required="" oninvalid="this.setCustomValidity('Sila isi ruangan ini.')" oninput="setCustomValidity('')">
+										Nyatakan: <input name="CatatanSebab" class="form-control" type="text" value="<?php echo $FailData->CatatanSebab;?>" placeholder="Nyatakan huraian bagi catatan di atas">
                                     </div>
                                 </div>
 								<?php endif;?>
@@ -110,14 +118,18 @@
             </div>
             <!-- /.container-fluid -->
 			<script>
-				$(document).ready(function(){
-					$(".datepickerAdd").datepicker({
+				$(document).ready(function(){		
+					var dateToday = new Date();			
+					$("input[name=TarikhSiap]").datepicker({
 						format: "dd/mm/yyyy"
-					});
-					$(".datepickerAdd").datepicker("setDate", new Date());
-					
-					$(".datepickerEdit").datepicker({
-						format: "dd/mm/yyyy"
+					});					
+					$("input[name=TarikhTerima]").datepicker({
+						format: "dd/mm/yyyy",
+						<?php if($FailData->TarikhTerima == "0000-00-00"):?>
+						startDate: dateToday
+						<?php else:?>
+						startDate: "<?php echo date('d/m/Y', strtotime($FailData->TarikhTerima));?>"
+						<?php endif;?>
 					});
 				});
 			</script>

@@ -73,7 +73,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Jumlah Fail Mengikut Tahun Permohonan</h3>
+                            <h3 class="box-title">Jumlah Fail(Mencapai Sasaran 14 Hari) Mengikut Bulan Permohonan</h3>
                             <ul class="list-inline text-right">
                                 <li>
                                     <h5><i class="fa fa-circle m-r-5" style="color: #00bfc7;"></i>Pelupusan</h5> </li>
@@ -121,7 +121,7 @@
 						data: [
 						<?php foreach($JFY as $eachJFY):?>
 							{
-								period: '<?php echo $eachJFY->YearStr;?>',
+								period: '<?php echo $eachJFY->Year."-".$eachJFY->Month;?>',
 								Pelupusan: <?php echo $eachJFY->Lupus;?>,
 								Pembangunan: <?php echo $eachJFY->Bangun;?>
 							},
@@ -138,6 +138,18 @@
 						lineWidth: 1,
 						hideHover: 'auto',
 						lineColors: ['#00bfc7', '#fb9678'],
+						xLabelFormat: function (x) {
+							var IndexToMonth = [ "Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogo", "Sep", "Okt", "Nov", "Dis" ];
+							var month = IndexToMonth[ x.getMonth() ];
+							var year = x.getFullYear();
+							return month + ' ' + year;
+						},
+						dateFormat: function (x) {
+							var IndexToMonth = [ "Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogo", "Sep", "Okt", "Nov", "Dis" ];
+							var month = IndexToMonth[ new Date(x).getMonth() ];
+							var year = new Date(x).getFullYear();
+							return month + ' ' + year;
+						},
 						resize: true
 						
 					});
