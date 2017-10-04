@@ -29,8 +29,15 @@ class Laporan extends CI_Controller {
 			$query = $this->db->query("SELECT SUBSTRING(TarikhPermohonan, 1, 4) AS Year, SUBSTRING(TarikhPermohonan, 6, 2) AS Month, CONCAT(MONTHNAME(STR_TO_DATE(SUBSTRING(TarikhPermohonan, 6, 2), '%m')),' ',SUBSTRING(TarikhPermohonan, 1, 4)) AS MonthYearStr FROM tbl_fail GROUP BY CONCAT(SUBSTRING(TarikhPermohonan, 6, 2),'-',SUBSTRING(TarikhPermohonan, 1, 4)) ORDER BY SUBSTRING(TarikhPermohonan, 1, 4),SUBSTRING(TarikhPermohonan, 6, 2) ASC;");
 			$data["BulanTahun"] = $query->result();
 			
+			$query = $this->db->query("SET lc_time_names = 'ms_MY';");
+			$query = $this->db->query("SELECT SUBSTRING(TarikhPermohonan, 1, 4) AS Year FROM tbl_fail GROUP BY SUBSTRING(TarikhPermohonan, 1, 4) ORDER BY SUBSTRING(TarikhPermohonan, 1, 4) ASC;");
+			$data["Tahun"] = $query->result();
+			
 			$query = $this->db->query("SELECT * FROM tbl_user WHERE UserGroup = 2;");
 			$data["SOList"] = $query->result();
+			
+			$query = $this->db->query("SELECT * FROM tbl_jenisfail;");
+			$data["JenisFailList"] = $query->result();
 			
 			$this->load->view('header', $data); 
 			$this->load->view('laporan/jana.php', $data);
@@ -39,41 +46,43 @@ class Laporan extends CI_Controller {
 	}
 	
 	public function papar(){
-		$Bulan = $this->input->post("Bulan");
+		//$Bulan = $this->input->post("Bulan");
+		$Tahun = $this->input->post("Tahun");
 		
-		$BulanArr = explode("_",$Bulan);
-		$Year = $BulanArr[0];
-		$Month = $BulanArr[1];
+		//$BulanArr = explode("_",$Bulan);
+		//$Year = $BulanArr[0];
+		//$Month = $BulanArr[1];
 		
-		$MonthYearStr = "";
+		//$MonthYearStr = "";
+		//
+		//if($Month == "01"){
+		//	$MonthYearStr = "Januari ".$Year;
+		//}elseif($Month == "02"){
+		//	$MonthYearStr = "Februari ".$Year;
+		//}elseif($Month == "03"){
+		//	$MonthYearStr = "Mac ".$Year;
+		//}elseif($Month == "04"){
+		//	$MonthYearStr = "April ".$Year;
+		//}elseif($Month == "05"){
+		//	$MonthYearStr = "Mei ".$Year;
+		//}elseif($Month == "06"){
+		//	$MonthYearStr = "Jun ".$Year;
+		//}elseif($Month == "07"){
+		//	$MonthYearStr = "Julai ".$Year;
+		//}elseif($Month == "08"){
+		//	$MonthYearStr = "Ogos ".$Year;
+		//}elseif($Month == "09"){
+		//	$MonthYearStr = "September ".$Year;
+		//}elseif($Month == "10"){
+		//	$MonthYearStr = "Oktober ".$Year;
+		//}elseif($Month == "11"){
+		//	$MonthYearStr = "November ".$Year;
+		//}elseif($Month == "12"){
+		//	$MonthYearStr = "Disember ".$Year;
+		//}
 		
-		if($Month == "01"){
-			$MonthYearStr = "Januari ".$Year;
-		}elseif($Month == "02"){
-			$MonthYearStr = "Februari ".$Year;
-		}elseif($Month == "03"){
-			$MonthYearStr = "Mac ".$Year;
-		}elseif($Month == "04"){
-			$MonthYearStr = "April ".$Year;
-		}elseif($Month == "05"){
-			$MonthYearStr = "Mei ".$Year;
-		}elseif($Month == "06"){
-			$MonthYearStr = "Jun ".$Year;
-		}elseif($Month == "07"){
-			$MonthYearStr = "Julai ".$Year;
-		}elseif($Month == "08"){
-			$MonthYearStr = "Ogos ".$Year;
-		}elseif($Month == "09"){
-			$MonthYearStr = "September ".$Year;
-		}elseif($Month == "10"){
-			$MonthYearStr = "Oktober ".$Year;
-		}elseif($Month == "11"){
-			$MonthYearStr = "November ".$Year;
-		}elseif($Month == "12"){
-			$MonthYearStr = "Disember ".$Year;
-		}
-		
-		$data["MonthYearStr"] = $MonthYearStr;
+		//$data["MonthYearStr"] = $MonthYearStr;
+		$data["YearStr"] = $Tahun;
 		
 		$SOID = $this->input->post("SOID");
 		
@@ -95,9 +104,30 @@ class Laporan extends CI_Controller {
 			$data["SasaranFilter"] = "Lebih dari 14 hari";
 		}
 		
+		$JenisFail = $this->input->post("JenisFailID");
+		$JenisFailFilter = "";		
+		
+		if($JenisFail == "1"){
+			$data["JenisFailFilter"] = "Fail Pelupusan";
+		}elseif($JenisFail == "2"){
+			$data["JenisFailFilter"] = "Fail Pembangunan";
+		}
+		
 		//ini_set('max_execution_time', 0);
 
 		$query = $this->db->query("SET lc_time_names = 'ms_MY';");
+		//$query = $this->db->query("SELECT *, 
+		//	tbl_fail.ID AS FailID, 
+		//	uk.FullName AS KeraniName, 
+		//	us.FullName AS SOName 
+		//	FROM tbl_fail 
+		//	INNER JOIN tbl_user AS uk ON tbl_fail.KeraniID = uk.ID 
+		//	INNER JOIN tbl_user AS us ON tbl_fail.SOID = us.ID 
+		//	INNER JOIN tbl_jenisfail ON tbl_fail.JenisFailID = tbl_jenisfail.ID 
+		//	WHERE tbl_fail.SOID = ".$SOID." 
+		//	AND SUBSTRING(tbl_fail.TarikhPermohonan, 1, 4) = '".$Year."' 
+		//	AND SUBSTRING(tbl_fail.TarikhPermohonan, 6, 2) = '".$Month."' ".$SasaranFilter." 
+		//	AND tbl_fail.JenisFailID = $JenisFail;");			
 		$query = $this->db->query("SELECT *, 
 			tbl_fail.ID AS FailID, 
 			uk.FullName AS KeraniName, 
@@ -107,8 +137,8 @@ class Laporan extends CI_Controller {
 			INNER JOIN tbl_user AS us ON tbl_fail.SOID = us.ID 
 			INNER JOIN tbl_jenisfail ON tbl_fail.JenisFailID = tbl_jenisfail.ID 
 			WHERE tbl_fail.SOID = ".$SOID." 
-			AND SUBSTRING(tbl_fail.TarikhPermohonan, 1, 4) = '".$Year."' 
-			AND SUBSTRING(tbl_fail.TarikhPermohonan, 6, 2) = '".$Month."' ".$SasaranFilter.";");				
+			AND SUBSTRING(tbl_fail.TarikhPermohonan, 1, 4) = '".$Tahun."' 
+			AND tbl_fail.JenisFailID = $JenisFail;");				
 			
 		$data["FailList"] = $query->result();
 		
@@ -122,6 +152,6 @@ class Laporan extends CI_Controller {
 
 		//download it D save F.
 		ob_clean();
-		$kmpdf->Output($MonthYearStr."_".$SOName."_".$data["SasaranFilter"].".pdf", "D");
+		$kmpdf->Output($MonthYearStr."_".$SOName."_".$data["SasaranFilter"].".pdf", "I");
 	}
 }

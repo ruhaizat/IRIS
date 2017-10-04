@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url();?>assets/images/fts_logo_60.png">
-    <title>File Tracking System</title>
+    <title>Sistem Pemantauan Laporan Tanah Bersepadu (IRIS)</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet">
@@ -36,6 +36,11 @@
         <div class="login-box">
             <div class="white-box">
                 <form class="form-horizontal form-material" onsubmit="frmSubmit();">
+                    <center>
+						<img src="<?php echo base_url();?>assets/images/Jata-Selangor-Vector.png" width="70px" height="110px"/>
+						<br/>
+						<h3 class="box-title m-b-20" style="font-size:17px;font-weight:bold;">Sistem Pemantauan Laporan<br/>Tanah Bersepadu (IRIS)</h3>
+					</center>
                     <h3 class="box-title m-b-20">Daftar Masuk</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">

@@ -18,12 +18,12 @@
                             <p class="text-muted m-b-30 font-13"> Sila pilih jenis penjanaan laporan </p>
                             <form class="form" method="post" action="<?php echo base_url();?>Laporan/papar">
                                 <div class="form-group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Bulan</label>
+                                    <label for="example-text-input" class="col-2 col-form-label">Tahun</label>
                                     <div class="col-10">
-                                        <select required="" name="Bulan" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')">
+                                        <select required="" name="Tahun" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')">
                                             <option value="">Sila Pilih...</option>
-											<?php foreach($BulanTahun as $eachBulanTahun):?>
-                                            <option value="<?php echo $eachBulanTahun->Year.'_'.$eachBulanTahun->Month;?>"><?php echo $eachBulanTahun->MonthYearStr;?></option>
+											<?php foreach($Tahun as $eachTahun):?>
+                                            <option value="<?php echo $eachTahun->Year;?>"><?php echo $eachTahun->Year;?></option>
 											<?php endforeach;?>
                                         </select>
                                     </div>
@@ -47,6 +47,17 @@
                                             <option value="S">Semua</option>
                                             <option value="W">Dalam tempoh 14 hari</option>
                                             <option value="M">Lebih dari 14 hari</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Jenis Fail</label>
+                                    <div class="col-10">
+                                        <select required="" name="JenisFailID" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')">
+                                            <option value="">Sila Pilih...</option>
+											<?php foreach($JenisFailList as $eachJenisFail):?>
+                                            <option value="<?php echo $eachJenisFail->ID;?>"><?php echo $eachJenisFail->NamaJenisFail;?></option>
+											<?php endforeach;?>
                                         </select>
                                     </div>
                                 </div>

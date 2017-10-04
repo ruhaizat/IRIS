@@ -27,6 +27,7 @@
                                             <th style="text-align:center;vertical-align:middle;">Tarikh Permohonan</th>
                                             <th style="text-align:center;vertical-align:middle;">Tarikh Buka Fail</th>
                                             <th style="text-align:center;vertical-align:middle;">Nama SO</th>
+                                            <th style="text-align:center;vertical-align:middle;">Jenis Kerja</th>
                                             <th style="text-align:center;vertical-align:middle;">Tarikh Terima</th>
                                             <th style="text-align:center;vertical-align:middle;">Tarikh Siap</th>
                                             <th style="text-align:center;vertical-align:middle;">Jumlah Hari</th>
@@ -44,11 +45,12 @@
                                             <td><?php echo date("d/m/Y", strtotime($eachFail->TarikhPermohonan));?></td>
                                             <td><?php echo date("d/m/Y", strtotime($eachFail->TarikhBukaFail));?></td>
                                             <td><?php echo $eachFail->SOName;?></td>
+                                            <td><?php echo $eachFail->JenisKerjaName;?></td>
                                             <td><?php if($eachFail->TarikhTerima != "0000-00-00"):echo date("d/m/Y", strtotime($eachFail->TarikhTerima));endif;?></td>
                                             <td><?php if($eachFail->TarikhSiap != "0000-00-00"):echo date("d/m/Y", strtotime($eachFail->TarikhSiap));endif;?></td>
                                             <td><?php echo $eachFail->JumlahHari;?></td>
                                             <td><?php if($eachFail->Catatan == 1):echo "Dalam Semakan";elseif($eachFail->Catatan == 2):echo "Dalam Proses";elseif($eachFail->Catatan == 3):echo "Maklum Balas / Kuiri";endif;?></td>
-                                            <td><a href="<?php echo base_url();?>FailKerja/kemaskini/<?php echo $eachFail->FailID;?>" title="Kemaskini"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a href="#" title="Padam" onclick="DeleteFile('<?php echo $eachFail->ID;?>','<?php echo $eachFail->NoFail;?>');"><i class="fa fa-trash"></i></a></td>
+                                            <td><a href="<?php echo base_url();?>FailKerja/kemaskini/<?php echo $eachFail->FailID;?>" title="Kemaskini"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a href="#" title="Padam" onclick="DeleteFile('<?php echo $eachFail->FailID;?>','<?php echo $eachFail->NoFail;?>');"><i class="fa fa-trash"></i></a></td>
                                         </tr>
 										<?php endforeach;?>
                                     </tbody>

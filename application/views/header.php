@@ -49,9 +49,17 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
-                <div class="top-left-part"><a class="logo" href="index.html"><b><img src="<?php echo base_url();?>assets/images/fts_logo_small_white.png" alt="home" /></b><span class="hidden-xs"><strong>IRIS</strong></span></a></div>
+                <div class="top-left-part">
+					<a class="logo" href="index.html">
+						<b>
+							<img src="<?php echo base_url();?>assets/images/fts_logo_small_white.png" alt="home" />
+						</b>
+						<span class="hidden-xs"><strong>IRIS</strong></span>
+					</a>
+				</div>
                 <ul class="nav navbar-top-links navbar-left hidden-xs">
                     <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+                    <li style="padding-top:5px;"><img src="<?php echo base_url();?>assets/images/Jata-Selangor-Vector.png" width="40px" height="50px"/> <b class="hidden-xs" style="color:white;">Sistem Pemantauan Laporan Tanah Bersepadu (IRIS)</b></li>
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li class="dropdown">
@@ -104,8 +112,8 @@
                     </li>
                     <li><a href="javascript:void(0);" class="waves-effect<?php if($activeMenu == 'P'):echo ' active';else: echo '';endif;?>"><i class="linea-icon linea-basic fa-fw ti-user"></i> <span class="hide-menu">Pengguna <span class="fa arrow"></span></span></a>
 					    <ul class="nav nav-second-level">
-                            <li> <a href="<?php echo base_url();?>Penggun">Senarai</a> </li>
-                            <li> <a href="<?php echo base_url();?>Penggun">Tambah</a> </li>
+                            <li> <a href="<?php echo base_url();?>Pengguna/senarai">Senarai</a> </li>
+                            <li> <a href="<?php echo base_url();?>Pengguna/index">Tambah</a> </li>
                         </ul>  
                     </li>
 					<?php endif;?>

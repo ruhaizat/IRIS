@@ -1,4 +1,4 @@
-            <footer class="footer text-center"> 2017 &copy; Sistem Pemantauan Laporan Tanah Bersepadu (IRIS) dibangunkan oleh <a href="http://ruhaizat.my" target="_blank">ruhaizat.my</a> </footer>
+            <footer class="footer text-center"> 2017 &copy; Sistem Pemantauan Laporan Tanah Bersepadu (IRIS)<br/>Support Team : Pejabat Daerah / Tanah Klang</footer>
         </div>
         <!-- /#page-wrapper -->
 	</div>

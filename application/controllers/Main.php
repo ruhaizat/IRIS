@@ -117,6 +117,19 @@ class Main extends CI_Controller {
 				$ID = $obj->ID;
 				$this->db->delete("tbl_fail", array("ID" => $ID));
 			break;
+			case "DeleteUser":
+				$ID = $obj->ID;
+				$this->db->delete("tbl_user", array("ID" => $ID));
+			break;
+			case "SemakNoFail":
+				$NoFail = $obj->NoFail;
+				$query = $this->db->query("SELECT * FROM tbl_fail WHERE NoFail = '$NoFail';");
+				if($query->num_rows() > 0){
+					echo "WUJUD";
+				}else{
+					echo "OK";
+				}
+			break;
 		}
 	}
 }

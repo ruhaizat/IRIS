@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/fts/';
+$config['base_url'] = 'http://localhost/IRIS/';
 
 /*
 |--------------------------------------------------------------------------
@@ -521,3 +521,21 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Additional Configuration
+|--------------------------------------------------------------------------
+|
+*/			
+$config['iris_mail_protocol'] = 'smtp';
+$config['iris_mail_smtp_host'] = 'ruhaizat.my';
+$config['iris_mail_smtp_port'] = 25;
+$config['iris_mail_smtp_user'] = 'iris@ruhaizat.my';
+$config['iris_mail_smtp_pass'] = 'irm_2809';
+$config['iris_mail_mailtype'] = 'html';
+$config['iris_mail_charset'] = 'iso-8859-1';
+$config['iris_mail_wordwrap'] = TRUE;
+
+$config['iris_mail_from_email'] = 'iris@ruhaizat.my';
+$config['iris_mail_from_name'] = 'IRIS Admin';

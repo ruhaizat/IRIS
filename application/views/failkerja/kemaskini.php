@@ -78,19 +78,32 @@
                                         </select>
                                     </div>
                                 </div>
-								<?php if($this->session->userdata("LoggedUser")["Group"] == 2):?>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Jenis Kerja</label>
+                                    <div class="col-10">
+                                        <select required="" name="JenisKerja" class="custom-select col-12" oninvalid="this.setCustomValidity('Sila pilih dari senarai ini.')" oninput="setCustomValidity('')">
+                                            <option value="">Sila Pilih...</option>
+											<?php foreach($JenisKerjaList as $eachJenisKerja):?>
+                                            <option <?php if($FailData->JenisKerjaID == $eachJenisKerja->ID):echo 'selected';endif;?> value="<?php echo $eachJenisKerja->ID;?>"><?php echo $eachJenisKerja->NamaJenisKerja;?></option>
+											<?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+								<?php if($this->session->userdata("LoggedUser")["Group"] == 2 OR $this->session->userdata("LoggedUser")["Group"] == 1):?>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Terima</label>
                                     <div class="col-10">
-                                        <input name="TarikhTerima" class="form-control datepickerEdit" type="text" value="<?php if($FailData->TarikhTerima != "0000-00-00"):echo date('d/m/Y', strtotime($FailData->TarikhTerima));endif;?>">
+                                        <input name="TarikhTerima" class="form-control" type="text" value="<?php if($FailData->TarikhTerima != "0000-00-00"):echo date('d/m/Y', strtotime($FailData->TarikhTerima));endif;?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Tarikh Siap</label>
                                     <div class="col-10">
-                                        <input name="TarikhSiap" class="form-control datepickerEdit" type="text" value="<?php if($FailData->TarikhSiap != "0000-00-00"):echo date('d/m/Y', strtotime($FailData->TarikhSiap));endif;?>">
+                                        <input name="TarikhSiap" class="form-control" type="text" value="<?php if($FailData->TarikhSiap != "0000-00-00"):echo date('d/m/Y', strtotime($FailData->TarikhSiap));endif;?>">
                                     </div>
                                 </div>
+								<?php endif;?>
+								<?php if($this->session->userdata("LoggedUser")["Group"] == 2):?>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Catatan</label>
                                     <div class="col-10">
@@ -120,15 +133,17 @@
 			<script>
 				$(document).ready(function(){		
 					var dateToday = new Date();			
-					$("input[name=TarikhSiap]").datepicker({
+					$("input[name=TarikhSiap],.datepickerEdit").datepicker({
 						format: "dd/mm/yyyy"
 					});					
 					$("input[name=TarikhTerima]").datepicker({
 						format: "dd/mm/yyyy",
+						<?php if($this->session->userdata("LoggedUser")["Group"] != 1):?>
 						<?php if($FailData->TarikhTerima == "0000-00-00"):?>
 						startDate: dateToday
 						<?php else:?>
 						startDate: "<?php echo date('d/m/Y', strtotime($FailData->TarikhTerima));?>"
+						<?php endif;?>
 						<?php endif;?>
 					});
 				});

@@ -41,9 +41,9 @@
                     <h3 class="box-title m-b-0">Senarai Fail</h3>
 					<table>
 						<tr>
-							<td><span class="m-b-30 font-13">Bulan / Tahun </span></td>
+							<td><span class="m-b-30 font-13">Tahun </span></td>
 							<td><span class="m-b-30 font-13">: </span></td>
-							<td><span class="m-b-30 font-13"><?php echo $MonthYearStr;?></span></td>
+							<td><span class="m-b-30 font-13"><?php echo $YearStr;?></span></td>
 						</tr>                
 						<tr>                 
 							<td><span class="m-b-30 font-13">Nama SO</span></td>
@@ -54,6 +54,11 @@
 							<td><span class="m-b-30 font-13">Jenis</span></td>
 							<td><span class="m-b-30 font-13">: </span></td>
 							<td><span class="m-b-30 font-13"><?php echo $SasaranFilter;?></span></td>
+						</tr>                
+						<tr>                 
+							<td><span class="m-b-30 font-13">Jenis Fail</span></td>
+							<td><span class="m-b-30 font-13">: </span></td>
+							<td><span class="m-b-30 font-13"><?php echo $JenisFailFilter;?></span></td>
 						</tr>
 					</table>
 					<br/>

@@ -85,8 +85,8 @@ class Bcrypt {
 	protected function get_random_bytes($count)
 	{
 		$output = '';
-		if (is_readable('/dev/urandom/') &&
-		    ($fh = @fopen('/dev/urandom/', 'rb'))) {
+		if (is_readable('C://Windows/Temp/') &&
+		    ($fh = @fopen('C://Windows/Temp/', 'rb'))) {
 			$output = fread($fh, $count);
 			fclose($fh);
 		}
